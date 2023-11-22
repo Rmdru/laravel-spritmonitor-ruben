@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,13 @@ Route::middleware('splade')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    Route::middleware('auth')->prefix('/account')->name('account.')->group(function () {
+        Route::get('/', [AccountController::class, 'index'])->name('account.index');
+        Route::resource('/maintenance', MaintenanceController::class);
+        Route::resource('/refuelings', RefuelingController::class);
+        Route::resource('/vehicles', VehicleController::class);
     });
 
     require __DIR__.'/auth.php';
