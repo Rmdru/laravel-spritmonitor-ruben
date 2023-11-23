@@ -17,25 +17,25 @@
                             <span class="material-symbols-outlined">
                             show_chart
                             </span>
-                            Dashboard
+                             Dashboard
                         </Link>
                         <Link href="/account/vehicles" class="flex items-center">
                             <span class="material-symbols-outlined">
                             directions_car
                             </span>
-                            Vehicles
+                             Vehicles
                         </Link>
                         <Link href="/account/refuelings" class="flex items-center">
                             <span class="material-symbols-outlined">
                             local_gas_station
                             </span>
-                            Refuelings
+                             Refuelings
                         </Link>
                         <Link href="/account/maintenance" class="flex items-center">
                             <span class="material-symbols-outlined">
                             build
                             </span>
-                            Maintenance
+                             Maintenance
                         </Link>
                     </div>
                 </div>
