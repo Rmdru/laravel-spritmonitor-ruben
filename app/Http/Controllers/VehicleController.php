@@ -115,9 +115,6 @@ class VehicleController extends Controller
             'diesel_mild_hybrid' => 'Diesel mild hybrid',
             'diesel_full_hybrid' => 'Diesel full hybrid',
             'diesel_plugin_hybrid' => 'Diesel plugin hybrid',
-            'diesel_lpg_mild_hybrid' => 'Diesel LPG mild hybrid',
-            'diesel_lpg_full_hybrid' => 'Diesel LPG full hybrid',
-            'diesel_lpg_plugin_hybrid' => 'Diesel LPG plugin hybrid',
             'cng' => 'CNG',
             'electricity' => 'Electricity',
             'hydrogen' => 'Hydrogen',
@@ -138,12 +135,7 @@ class VehicleController extends Controller
 
         $validatedData = $request->validated();
 
-        $date = \DateTime::createFromFormat('d-m-Y', $validatedData['purchase_date']);
-
-        $formattedDate = $date->format('Y-m-d');
-
         $validatedData['user_id'] = $user->id;
-        $validatedData['purchase_date'] = $formattedDate;
 
         Vehicle::create($validatedData);
 
@@ -237,10 +229,6 @@ class VehicleController extends Controller
             'diesel_lpg' => 'Diesel LPG',
             'diesel_mild_hybrid' => 'Diesel mild hybrid',
             'diesel_full_hybrid' => 'Diesel full hybrid',
-            'diesel_plugin_hybrid' => 'Diesel plugin hybrid',
-            'diesel_lpg_mild_hybrid' => 'Diesel LPG mild hybrid',
-            'diesel_lpg_full_hybrid' => 'Diesel LPG full hybrid',
-            'diesel_lpg_plugin_hybrid' => 'Diesel LPG plugin hybrid',
             'cng' => 'CNG',
             'electricity' => 'Electricity',
             'hydrogen' => 'Hydrogen',
