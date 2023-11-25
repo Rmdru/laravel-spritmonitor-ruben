@@ -11,7 +11,7 @@ class UpdateVehicleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateVehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'brand' => ['required', 'string', 'max:50'], 
+            'model' => ['required', 'string', 'max:50'],
+            'version' => ['required', 'string', 'max:50'],
+            'engine' => ['required', 'string', 'max:50'],
+            'factory_specification_fuel_usage' => ['required', 'numeric'],
+            'mileage_start' => ['required', 'integer'],
+            'purchase_date' => ['required', 'date'],
+            'license_plate' => ['nullable', 'string'],
+            'fuel_type' => ['required', 'string'],
         ];
     }
 }
