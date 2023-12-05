@@ -82,13 +82,21 @@ class Refuelings extends AbstractTable
      */
     public function configure(SpladeTable $table)
     {
+        $vehicles = Vehicle::all()->map(function ($vehicle) {
+            return [
+                'id' => $vehicle->id,
+                $brand = ucfirst($vehicle->brand),
+                'label' => "{$brand} {$vehicle->model} {$vehicle->version} {$vehicle->engine}",
+            ];
+        })->pluck('label', 'id')->toArray();
+
         $table
             ->withGlobalSearch(columns: ['id', 'vehicle_id', 'date', 'gas_station', 'fuel_type', 'amount', 'total_price', 'mileage_begin', 'mileage_end', 'fuel_usage_onboard_computer', 'fuel_usage', 'costs_per_kilometer', 'tyres', 'climate_control', 'routes', 'driving_style', 'comments'])
             ->column('id', sortable: true)
             ->column(key: 'vehicles.brand', label: 'Brand')
             ->selectFilter(
                 key: 'vehicles_id',
-                options: Vehicle::pluck('model', 'id')->toArray(),
+                options: $vehicles,
                 label: 'Brand'
             )
             ->column(key: 'vehicles.model', label: 'Model')
