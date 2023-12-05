@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\RefuelingController;
 use Illuminate\Support\Facades\Route;
 
 /*

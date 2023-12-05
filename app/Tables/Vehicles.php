@@ -58,8 +58,8 @@ class Vehicles extends AbstractTable
         return QueryBuilder::for(Vehicle::class)
             ->where('user_id', $userId)
             ->defaultSort('id')
-            ->allowedSorts(['id', 'brand', 'model', 'version', 'engine', 'factory_specification_fuel_usage', 'average_fuel_usage', 'mileage_start', 'mileage_latest', 'purchase_date', 'license_plate', 'fuel_type', 'created_at'])
-            ->allowedFilters(['id', 'brand', 'model', 'version', 'engine', 'factory_specification_fuel_usage', 'average_fuel_usage', 'mileage_start', 'mileage_latest', 'purchase_date', 'license_plate', 'fuel_type', 'created_at', $globalSearch]);
+            ->allowedSorts(['id', 'brand', 'model', 'version', 'engine', 'factory_specification_fuel_usage', 'average_fuel_usage', 'mileage_start', 'mileage_latest', 'purchase_date', 'license_plate', 'fuel_type'])
+            ->allowedFilters(['id', 'brand', 'model', 'version', 'engine', 'factory_specification_fuel_usage', 'average_fuel_usage', 'mileage_start', 'mileage_latest', 'purchase_date', 'license_plate', 'fuel_type', $globalSearch]);
     }
 
     /**

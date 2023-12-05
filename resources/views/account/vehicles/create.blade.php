@@ -1,5 +1,7 @@
 <x-account-layout>
-    <h1 class="text-2x1 font-semibold p-4 flex items-centered"><span class="material-symbols-outlined">add</span> Add vehicle</h1>
+    <div class="flex justify-between">
+        <h1 class="text-2x1 font-semibold p-4 flex items-centered"><span class="material-symbols-outlined">add</span> Add vehicle</h1>
+    </div>
     <x-splade-form :action="route('account.vehicles.store')" class="p-4 bg-white rounded-md space-y-2">
         <x-splade-select name="brand" :options="$brands" label="Brand" placeholder="Choose brand" class="pb-3" />
         <x-splade-input name="model" label="Model" />
