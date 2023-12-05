@@ -53,7 +53,7 @@ class CreateRefuelingForm extends AbstractForm
         })->pluck('label', 'id')->toArray();
 
         return [
-            Select::make('vehicle')
+            Select::make('vehicle_id')
                 ->label('Vehicle')
                 ->options($vehicles)
                 ->class('pb-4'),
