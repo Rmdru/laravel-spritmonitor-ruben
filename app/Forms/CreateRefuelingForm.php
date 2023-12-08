@@ -27,18 +27,11 @@ class CreateRefuelingForm extends AbstractForm
     {
 
         $fuel_types = [
-            'gasoline' => 'Gasoline',
-            'gasoline_lpg' => 'Gasoline LPG',
-            'gasoline_mild_hybrid' => 'Gasoline mild hybrid',
-            'gasoline_full_hybrid' => 'Gasoline full hybrid',
-            'gasoline_plugin_hybrid' => 'Gasoline plugin hybrid',
-            'gasoline_lpg_mild_hybrid' => 'Gasoline LPG mild hybrid',
-            'gasoline_lpg_full_hybrid' => 'Gasoline LPG full hybrid',
-            'gasoline_lpg_plugin_hybrid' => 'Gasoline LPG plugin hybrid',
+            'euro_95' => 'Euro 95 (E10)',
+            'euro_98' => 'Euro 98 (E5)',
+            'euro_102' => 'Euro 102',
             'diesel' => 'Diesel',
-            'diesel_lpg' => 'Diesel LPG',
-            'diesel_mild_hybrid' => 'Diesel mild hybrid',
-            'diesel_full_hybrid' => 'Diesel full hybrid',
+            'lpg' => 'LPG',
             'cng' => 'CNG',
             'electricity' => 'Electricity',
             'hydrogen' => 'Hydrogen',
@@ -90,13 +83,13 @@ class CreateRefuelingForm extends AbstractForm
             Radios::make('tyres')
             ->label('Tyres')
             ->options([
-                'summer_tires' => 'Summer tires',
-                'winter_tires' => 'Winter tires',
-                'all_season_tires' => 'All season tires',
+                'summer_tyres' => 'Summer tyres',
+                'winter_tyres' => 'Winter tyres',
+                'all_season_tyres' => 'All season tyres',
             ])
             ->inline(),
 
-            Checkboxes::make('options')
+            Checkboxes::make('climate_control')
                 ->label('Climate control')
                 ->options([
                     'airconditioning' => 'Airconditioning',
@@ -105,11 +98,11 @@ class CreateRefuelingForm extends AbstractForm
                 ])
                 ->inline(),
 
-            Checkboxes::make('options')
+            Checkboxes::make('routes')
                 ->label('Routes')
                 ->options([
                     'city' => 'City',
-                    'country_roades' => 'Country roads',
+                    'country_roads' => 'Country roads',
                     'highway' => 'Highway',
                 ])
                 ->inline(),
