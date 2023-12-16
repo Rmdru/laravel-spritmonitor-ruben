@@ -25,7 +25,6 @@ class CreateRefuelingForm extends AbstractForm
 
     public function fields(): array
     {
-
         $fuel_types = [
             'euro_95' => 'Euro 95 (E10)',
             'euro_98' => 'Euro 98 (E5)',
@@ -49,36 +48,51 @@ class CreateRefuelingForm extends AbstractForm
             Select::make('vehicle_id')
                 ->label('Vehicle')
                 ->options($vehicles)
-                ->class('pb-4'),
+                ->class('pb-4')
+                ->rules(['required']),
 
             Date::make('date')
-                ->label(__('Date')),
+                ->label(__('Date'))
+                ->rules(['required']),
 
             Input::make('gas_station')
-                ->label(__('Gas station')),
+                ->label(__('Gas station'))
+                ->rules(['required', 'max:100', 'min:2']),
 
             Select::make('fuel_type')
                 ->label('Fuel type')
                 ->options($fuel_types)
-                ->class('pb-4'),
+                ->class('pb-4')
+                ->rules(['required']),
 
             Input::make('amount')
-                ->label(__('Amount')),
+                ->label(__('Amount'))
+                ->rules(['required']),
 
             Input::make('unit_price')
-                ->label(__('Unit price')),
+                ->label(__('Unit price'))
+                ->rules(['required']),
 
             Input::make('total_price')
-                ->label(__('Total price')),
+                ->label(__('Total price'))
+                ->rules(['required']),
 
             Input::make('mileage_begin')
                 ->label(__('Mileage begin')),
 
             Input::make('mileage_end')
-                ->label(__('Mileage end')),
+                ->label(__('Mileage end'))
+                ->rules(['required']),
 
             Input::make('fuel_usage_onboard_computer')
                 ->label(__('Fuel usage onboard computer')),
+
+            Input::make('fuel_usage')
+                ->label(__('Fuel usage')),
+
+            Input::make('costs_per_kilometer')
+                ->label(__('Costs per kilometer'))
+                ->rules(['required']),
 
             Radios::make('tyres')
             ->label('Tyres')

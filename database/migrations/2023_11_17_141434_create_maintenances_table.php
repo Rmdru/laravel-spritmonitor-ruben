@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('date');
+            $table->date('date');
             $table->string('garage', 100);
-            $table->integer('small_maintenance');
-            $table->integer('big_maintenance');
-            $table->integer('washed');
-            $table->integer('tyre_pressure');
-            $table->string('tasks_messages')->nullable();
+            $table->string('type_maintenance', 100)->nullable();
+            $table->string('washed', 100);
+            $table->string('tyre_pressure', 100);
+            $table->string('tasks_messages', 100)->nullable();
             $table->float('total_price');
             $table->integer('mileage_begin');
             $table->integer('mileage_end');

@@ -14,26 +14,22 @@ return new class extends Migration
         Schema::create('refuelings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('date');
+            $table->date('date');
             $table->string('gas_station', 100);
-            $table->integer('fuel_type');
+            $table->string('fuel_type', 100);
             $table->float('amount');
             $table->float('unit_price');
             $table->float('total_price');
-            $table->integer('mileage_begin');
+            $table->integer('mileage_begin')->nullable();
             $table->integer('mileage_end');
-            $table->float('fuel_usage_onboard_computer');
+            $table->float('fuel_usage_onboard_computer')->nullable();
             $table->float('fuel_usage');
             $table->float('costs_per_kilometer');
-            $table->integer('tyres');
-            $table->integer('heater');
-            $table->integer('airconditioning');
-            $table->integer('trailer');
-            $table->integer('luggage');
-            $table->integer('city_driving');
-            $table->integer('country_road_driving');
-            $table->integer('highway_driving');
-            $table->string('message')->nullable();
+            $table->string('tyres', 100)->nullable();
+            $table->json('climate_control')->nullable();
+            $table->json('routes')->nullable();
+            $table->string('driving_style', 100)->nullable();
+            $table->string('comments', 100)->text();
             $table->timestamps();
         });
     }

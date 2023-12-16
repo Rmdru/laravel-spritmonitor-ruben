@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('brand', 50);
             $table->string('model', 50);
             $table->string('version', 50);
-            $table->string('engine', 50);
+            $table->string('engine', 50)->nullable();
             $table->float('factory_specification_fuel_usage');
-            $table->float('average_fuel_usage');
+            $table->float('average_fuel_usage')->nullable();
             $table->integer('mileage_start');
-            $table->integer('mileage_latest');
-            $table->timestamp('purchase_date');
+            $table->integer('mileage_latest')->nullable();
+            $table->date('purchase_date');
             $table->string('license_plate', 20)->nullable();
             $table->string('fuel_type', 30);
             $table->timestamps();
