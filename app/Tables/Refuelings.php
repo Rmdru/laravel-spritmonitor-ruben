@@ -181,10 +181,13 @@ class Refuelings extends AbstractTable
                     'climate_control' => '<span class="material-symbols-outlined">thermostat</span>',
                 ];
             
-                // Display icons based on the array values
                 $climate_control = collect($climate_control)->map(function ($control) use ($iconMap) {
                     return $iconMap[$control] ?? '';
                 })->implode(' ');
+
+                if (empty($climate_control)) {
+                    $climate_control = "-";
+                }
             
                 return new \Illuminate\Support\HtmlString($climate_control);
             })
@@ -199,6 +202,10 @@ class Refuelings extends AbstractTable
                 $routes = collect($routes)->map(function ($route) use ($iconMap) {
                     return $iconMap[$route] ?? '';
                 })->implode(' ');
+
+                if (empty($routes)) {
+                    $routes = "-";
+                }
             
                 return new \Illuminate\Support\HtmlString($routes);
             })

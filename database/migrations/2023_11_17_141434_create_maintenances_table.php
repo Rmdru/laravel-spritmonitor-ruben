@@ -15,14 +15,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
             $table->date('date');
-            $table->string('garage', 100);
+            $table->string('garage', 100)->nullable();
             $table->string('type_maintenance', 100)->nullable();
-            $table->string('washed', 100);
-            $table->string('tyre_pressure', 100);
-            $table->string('tasks_messages', 100)->nullable();
-            $table->float('total_price');
-            $table->integer('mileage_begin');
-            $table->integer('mileage_end');
+            $table->json('apk', 100)->nullable();
+            $table->date('apk_date')->nullable();
+            $table->json('washed', 100)->nullable();
+            $table->json('tyre_pressure', 100)->nullable();
+            $table->text('tasks_messages')->nullable();
+            $table->float('total_price')->nullable();
+            $table->integer('mileage_begin')->nullable();
+            $table->integer('mileage_end')->nullable();
             $table->timestamps();
         });
     }

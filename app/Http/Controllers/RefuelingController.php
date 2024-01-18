@@ -57,8 +57,8 @@ class RefuelingController extends Controller
             $data['costs_per_kilometer'] = 0;
         }
 
-        $data['climate_control'] = json_encode($data['climate_control']);
-        $data['routes'] = json_encode($data['routes']);
+        $data['climate_control'] = isset($data['climate_control']) && is_array($data['climate_control']) ? json_encode($data['climate_control']) : json_encode([]);
+        $data['routes'] = isset($data['routes']) && is_array($data['routes']) ? json_encode($data['routes']) : json_encode([]);
 
         Refueling::create($data);
 
@@ -105,8 +105,8 @@ class RefuelingController extends Controller
             $data['costs_per_kilometer'] = 0;
         }
 
-        $data['climate_control'] = json_encode($data['climate_control']);
-        $data['routes'] = json_encode($data['routes']);
+        $data['climate_control'] = isset($data['climate_control']) && is_array($data['climate_control']) ? json_encode($data['climate_control']) : json_encode([]);
+        $data['routes'] = isset($data['routes']) && is_array($data['routes']) ? json_encode($data['routes']) : json_encode([]);
 
         $refueling->update($data);
 
