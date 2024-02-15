@@ -2,16 +2,16 @@
 
 namespace App\Forms;
 
+use App\Models\Vehicle;
 use ProtoneMedia\Splade\AbstractForm;
-use ProtoneMedia\Splade\FormBuilder\Submit;
-use ProtoneMedia\Splade\FormBuilder\Input;
+use ProtoneMedia\Splade\FormBuilder\Checkboxes;
 use ProtoneMedia\Splade\FormBuilder\Date;
+use ProtoneMedia\Splade\FormBuilder\Input;
 use ProtoneMedia\Splade\FormBuilder\Radios;
 use ProtoneMedia\Splade\FormBuilder\Select;
-use ProtoneMedia\Splade\FormBuilder\Checkboxes;
+use ProtoneMedia\Splade\FormBuilder\Submit;
 use ProtoneMedia\Splade\FormBuilder\Textarea;
 use ProtoneMedia\Splade\SpladeForm;
-use App\Models\Vehicle;
 
 class UpdateRefuelingForm extends AbstractForm
 {
@@ -87,13 +87,13 @@ class UpdateRefuelingForm extends AbstractForm
                 ->label(__('Fuel usage onboard computer')),
 
             Radios::make('tyres')
-            ->label('Tyres')
-            ->options([
-                'summer_tyres' => 'Summer tyres',
-                'winter_tyres' => 'Winter tyres',
-                'all_season_tyres' => 'All season tyres',
-            ])
-            ->inline(),
+                ->label('Tyres')
+                ->options([
+                    'summer_tyres' => 'Summer tyres',
+                    'winter_tyres' => 'Winter tyres',
+                    'all_season_tyres' => 'All season tyres',
+                ])
+                ->inline(),
 
             Checkboxes::make('climate_control')
                 ->label('Climate control')

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Tables\Refuelings;
-use App\Models\Refueling;
 use App\Forms\CreateRefuelingForm;
 use App\Forms\UpdateRefuelingForm;
+use App\Models\Refueling;
+use App\Tables\Refuelings;
+use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Toast;
 
 class RefuelingController extends Controller
@@ -15,9 +15,9 @@ class RefuelingController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {        
+    {
         return view('account.refuelings.index', [
-            'refuelings' => Refuelings::class
+            'refuelings' => Refuelings::class,
         ]);
     }
 
@@ -27,7 +27,7 @@ class RefuelingController extends Controller
     public function create()
     {
         return view('account.refuelings.create', [
-            'form' => CreateRefuelingForm::class
+            'form' => CreateRefuelingForm::class,
         ]);
     }
 
@@ -47,9 +47,9 @@ class RefuelingController extends Controller
 
         if ($distance_traveled > 0) {
             $fuel_usage = $data['amount'] / $distance_traveled * 100;
-    
+
             $cost_per_kilometer = $data['amount'] / $distance_traveled;
-    
+
             $data['fuel_usage'] = $fuel_usage;
             $data['costs_per_kilometer'] = $cost_per_kilometer;
         } else {
@@ -77,8 +77,8 @@ class RefuelingController extends Controller
 
         return view('account.refuelings.edit', [
             'form' => UpdateRefuelingForm::make()
-            ->action(route('account.refuelings.update', $refueling))
-            ->fill($refueling)
+                ->action(route('account.refuelings.update', $refueling))
+                ->fill($refueling),
         ]);
     }
 
@@ -95,9 +95,9 @@ class RefuelingController extends Controller
 
         if ($distance_traveled > 0) {
             $fuel_usage = $data['amount'] / $distance_traveled * 100;
-    
+
             $cost_per_kilometer = $data['amount'] / $distance_traveled;
-    
+
             $data['fuel_usage'] = $fuel_usage;
             $data['costs_per_kilometer'] = $cost_per_kilometer;
         } else {

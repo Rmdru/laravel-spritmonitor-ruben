@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Tables\Vehicles;
-use App\Models\Vehicle;
-use App\Http\Controllers\Splade;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
-use Illuminate\Http\Request;
-use ProtoneMedia\Splade\Facades\Toast;
+use App\Models\Vehicle;
+use App\Tables\Vehicles;
 use Illuminate\Support\Facades\Auth;
-use ProtoneMedia\Splade\SpladeForm;
-use ProtoneMedia\Splade\FormBuilder\Submit;
-use ProtoneMedia\Splade\FormBuilder\Input;
+use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\FormBuilder\Date;
+use ProtoneMedia\Splade\FormBuilder\Input;
 use ProtoneMedia\Splade\FormBuilder\Select;
-
+use ProtoneMedia\Splade\FormBuilder\Submit;
+use ProtoneMedia\Splade\SpladeForm;
 
 class VehicleController extends Controller
 {
@@ -122,7 +119,7 @@ class VehicleController extends Controller
 
         return view('account.vehicles.create', [
             'brands' => $brands,
-            'fuel_types' => $fuel_types
+            'fuel_types' => $fuel_types,
         ]);
     }
 
@@ -234,7 +231,6 @@ class VehicleController extends Controller
             'hydrogen' => 'Hydrogen',
         ];
 
-
         $form = SpladeForm::make()
             ->action(route('account.vehicles.update', $vehicle))
             ->fields([
@@ -252,7 +248,7 @@ class VehicleController extends Controller
             ->fill($vehicle)
             ->method('PUT')
             ->class('rounded p-4 bg-white');
- 
+
         return view('account.vehicles.edit', [
             'form' => $form,
             'vehicle' => $vehicle,

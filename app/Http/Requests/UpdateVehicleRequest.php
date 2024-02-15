@@ -22,7 +22,7 @@ class UpdateVehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'brand' => ['required', 'string', 'max:50'], 
+            'brand' => ['required', 'string', 'max:50'],
             'model' => ['required', 'string', 'max:50'],
             'version' => ['required', 'string', 'max:50'],
             'engine' => ['required', 'string', 'max:50'],

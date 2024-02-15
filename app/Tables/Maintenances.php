@@ -5,12 +5,12 @@ namespace App\Tables;
 use App\Models\Maintenance;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
 use Spatie\QueryBuilder\AllowedFilter;
-use Illuminate\Support\Collection;
 use Spatie\QueryBuilder\QueryBuilder;
-use Illuminate\Support\Facades\Auth;
 
 class Maintenances extends AbstractTable
 {
@@ -45,7 +45,7 @@ class Maintenances extends AbstractTable
 
         $globalSearch = AllowedFilter::callback('global', function ($query, $value) {
             $query->where(function ($query) use ($value) {
-                Collection :: wrap($value)->each(function ($value) use ($query) {
+                Collection::wrap($value)->each(function ($value) use ($query) {
                     $query
                         ->orWhere('date', 'LIKE', "%{$value}%")
                         ->orWhere('garage', 'LIKE', "%{$value}%")
@@ -61,6 +61,7 @@ class Maintenances extends AbstractTable
                 });
             });
         });
+
         return QueryBuilder::for(Maintenance::class)
             ->whereHas('vehicle', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
@@ -73,7 +74,6 @@ class Maintenances extends AbstractTable
     /**
      * Configure the given SpladeTable.
      *
-     * @param \ProtoneMedia\Splade\SpladeTable $table
      * @return void
      */
     public function configure(SpladeTable $table)
@@ -91,22 +91,22 @@ class Maintenances extends AbstractTable
             ->column('id', sortable: true)
             ->column(key: 'vehicle.brand', label: 'Brand', as: function ($fuel_type) {
                 $fuel_type = ucfirst($fuel_type);
-        
-                $fuel_type = str_replace("_", " ", $fuel_type);
-        
+
+                $fuel_type = str_replace('_', ' ', $fuel_type);
+
                 return $fuel_type;
             })
             ->column(key: 'vehicle.model', label: 'Model')
             ->column('date', sortable: true, as: function ($date) {
-                $date = date("d-m-Y", strtotime($date));
-        
+                $date = date('d-m-Y', strtotime($date));
+
                 return $date;
             })
             ->column('garage', sortable: true, as: function ($garage) {
                 if (empty($garage)) {
-                    $garage = "-";
+                    $garage = '-';
                 }
-        
+
                 return $garage;
             })
             ->column('type_maintenance', sortable: true, as: function ($type_maintenance) {
@@ -117,99 +117,99 @@ class Maintenances extends AbstractTable
                     'big_maintenance' => '<span class="material-symbols-outlined">construction</span>&nbsp;Big',
                     'longlife_maintenance' => '<span class="material-symbols-outlined">oil_barrel</span>&nbsp;Longlife',
                 ];
-            
+
                 $type_maintenance = collect($type_maintenance)->map(function ($maintenance) use ($iconMap) {
                     return $iconMap[$maintenance] ?? '';
                 })->implode(' ');
 
                 if (empty($type_maintenance)) {
-                    $type_maintenance = "-";
+                    $type_maintenance = '-';
                 }
-        
+
                 return new \Illuminate\Support\HtmlString($type_maintenance);
             })
             ->column('apk', sortable: true, as: function ($apk) {
-                $apk = json_decode($apk);   
+                $apk = json_decode($apk);
                 $iconMap = [
                     'no_apk' => '<span class="material-symbols-outlined">no_crash</span>&nbsp;No',
                     'apk' => '<span class="material-symbols-outlined">health_and_safety</span>&nbsp;APK',
                 ];
-            
+
                 $apk = collect($apk)->map(function ($apk_icon) use ($iconMap) {
                     return $iconMap[$apk_icon] ?? '';
                 })->implode(' ');
 
                 if (empty($apk)) {
-                    $apk = "-";
+                    $apk = '-';
                 }
-        
+
                 return new \Illuminate\Support\HtmlString($apk);
             })
             ->column('apk_date', sortable: true, as: function ($apk_date) {
-                $apk_date = date("d-m-Y", strtotime($apk_date));
-        
-                if ($apk_date == "01-01-1970") {
-                    $apk_date = "-";
+                $apk_date = date('d-m-Y', strtotime($apk_date));
+
+                if ($apk_date == '01-01-1970') {
+                    $apk_date = '-';
                 }
 
                 return $apk_date;
             })
             ->column('washed', sortable: true, as: function ($washed) {
-                $washed = json_decode($washed);   
+                $washed = json_decode($washed);
                 $iconMap = [
                     'washed' => '<span class="material-symbols-outlined">local_car_wash</span>',
                 ];
-            
+
                 $washed = collect($washed)->map(function ($wash) use ($iconMap) {
                     return $iconMap[$wash] ?? '';
                 })->implode(' ');
 
                 if (empty($washed)) {
-                    $washed = "-";
+                    $washed = '-';
                 }
-            
+
                 return new \Illuminate\Support\HtmlString($washed);
             })
             ->column('tyre_pressure', sortable: true, as: function ($tyre_pressure) {
-                $tyre_pressure = json_decode($tyre_pressure);   
+                $tyre_pressure = json_decode($tyre_pressure);
                 $iconMap = [
                     'tyre_pressure' => '<span class="material-symbols-outlined">tire_repair</span>',
                 ];
-            
+
                 $tyre_pressure = collect($tyre_pressure)->map(function ($tyre) use ($iconMap) {
                     return $iconMap[$tyre] ?? '';
                 })->implode(' ');
 
                 if (empty($tyre_pressure)) {
-                    $tyre_pressure = "-";
+                    $tyre_pressure = '-';
                 }
-            
+
                 return new \Illuminate\Support\HtmlString($tyre_pressure);
             })
             ->column('tasks_messages', sortable: true, as: function ($tasks_messages) {
                 if (empty($tasks_messages)) {
-                    $tasks_messages = "-";
+                    $tasks_messages = '-';
                 }
-        
+
                 return $tasks_messages;
             })
             ->column('total_price', sortable: true, as: function ($total_price) {
-                $total_price = str_replace(".", ",", $total_price);
-        
+                $total_price = str_replace('.', ',', $total_price);
+
                 return $total_price;
             })
             ->column('mileage_begin', sortable: true, as: function ($mileage_begin) {
                 if (empty($mileage_begin)) {
-                    $mileage_begin = "-";
+                    $mileage_begin = '-';
                 }
-        
+
                 return $mileage_begin;
             })
             ->column('mileage_end', sortable: true, as: function ($mileage_end) {
                 if (empty($mileage_end)) {
-                    $mileage_end = "-";
+                    $mileage_end = '-';
                 }
-        
+
                 return $mileage_end;
             })
             ->column('action')

@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Vehicle;
-use App\Models\Maintenance;
-use App\Tables\Maintenances;
-use ProtoneMedia\Splade\SpladeForm;
-use ProtoneMedia\Splade\FormBuilder\Submit;
-use ProtoneMedia\Splade\FormBuilder\Input;
-use ProtoneMedia\Splade\FormBuilder\Date;
-use ProtoneMedia\Splade\FormBuilder\Select;
-use ProtoneMedia\Splade\FormBuilder\Checkboxes;
-use ProtoneMedia\Splade\FormBuilder\Radios;
-use ProtoneMedia\Splade\FormBuilder\Text;
 use App\Http\Requests\CreateMaintenanceRequest;
+use App\Models\Maintenance;
+use App\Models\Vehicle;
+use App\Tables\Maintenances;
 use ProtoneMedia\Splade\Facades\Toast;
+use ProtoneMedia\Splade\FormBuilder\Checkboxes;
+use ProtoneMedia\Splade\FormBuilder\Date;
+use ProtoneMedia\Splade\FormBuilder\Input;
+use ProtoneMedia\Splade\FormBuilder\Radios;
+use ProtoneMedia\Splade\FormBuilder\Select;
+use ProtoneMedia\Splade\FormBuilder\Submit;
+use ProtoneMedia\Splade\FormBuilder\Text;
+use ProtoneMedia\Splade\SpladeForm;
 
 class MaintenanceController extends Controller
 {
@@ -25,7 +24,7 @@ class MaintenanceController extends Controller
     public function index()
     {
         return view('account.maintenances.index', [
-            'maintenances' => Maintenances::class
+            'maintenances' => Maintenances::class,
         ]);
     }
 
@@ -43,26 +42,26 @@ class MaintenanceController extends Controller
         })->pluck('label', 'id')->toArray();
 
         $form = SpladeForm::make()
-        ->action(route('account.maintenance.store'))
-        ->class('space-y-4 p-4 bg-white rounded')
-        ->fields([
-            Select::make('vehicle_id')->label('Vehicle')->options($vehicles)->class("pb-4")->rules(['required']),
-            Date::make('date')->label('Date')->rules(['required']),
-            Input::make('garage')->label('Garage'),
-            Radios::make('type_maintenance')->label('Type maintenance')->options(['no_maintenance' => 'No maintenance', 'maintenance' => 'Maintenance', 'small_maintenance' => 'Small maintenance', 'big_maintenance' => 'Big maintenance', 'longlife_maintenance' => 'Longlife maintenance'])->inline()->rules(['required']),
-            Checkboxes::make('apk')->label('APK')->options(['apk' => 'APK']),
-            Date::make('apk_date')->label('APK date'),
-            Checkboxes::make('washed')->label('Washed')->options(['washed' => 'Washed']),
-            Checkboxes::make('tyre_pressure')->label('Tyre pressure')->options(['tyre_pressure' => 'Tyre pressure']),
-            Text::make('tasks_messages')->label('Tasks/messages'),
-            Input::make('total_price')->label('Total price'),
-            Input::make('mileage_begin')->label('Mileage begin'),
-            Input::make('mileage_end')->label('Mileage end')->class('pb-4'),
-            Submit::make()->label('Save'),
-        ]);
+            ->action(route('account.maintenance.store'))
+            ->class('space-y-4 p-4 bg-white rounded')
+            ->fields([
+                Select::make('vehicle_id')->label('Vehicle')->options($vehicles)->class('pb-4')->rules(['required']),
+                Date::make('date')->label('Date')->rules(['required']),
+                Input::make('garage')->label('Garage'),
+                Radios::make('type_maintenance')->label('Type maintenance')->options(['no_maintenance' => 'No maintenance', 'maintenance' => 'Maintenance', 'small_maintenance' => 'Small maintenance', 'big_maintenance' => 'Big maintenance', 'longlife_maintenance' => 'Longlife maintenance'])->inline()->rules(['required']),
+                Checkboxes::make('apk')->label('APK')->options(['apk' => 'APK']),
+                Date::make('apk_date')->label('APK date'),
+                Checkboxes::make('washed')->label('Washed')->options(['washed' => 'Washed']),
+                Checkboxes::make('tyre_pressure')->label('Tyre pressure')->options(['tyre_pressure' => 'Tyre pressure']),
+                Text::make('tasks_messages')->label('Tasks/messages'),
+                Input::make('total_price')->label('Total price'),
+                Input::make('mileage_begin')->label('Mileage begin'),
+                Input::make('mileage_end')->label('Mileage end')->class('pb-4'),
+                Submit::make()->label('Save'),
+            ]);
 
         return view('account.maintenances.create', [
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
@@ -102,28 +101,28 @@ class MaintenanceController extends Controller
         })->pluck('label', 'id')->toArray();
 
         $form = SpladeForm::make()
-        ->action(route('account.maintenance.update', $maintenance))
-        ->method('PUT')
-        ->class('space-y-4 p-4 bg-white rounded')
-        ->fields([
-            Select::make('vehicle_id')->label('Vehicle')->options($vehicles)->class("pb-4")->rules(['required']),
-            Date::make('date')->label('Date')->rules(['required']),
-            Input::make('garage')->label('Garage'),
-            Radios::make('type_maintenance')->label('Type maintenance')->options(['no_maintenance' => 'No maintenance', 'maintenance' => 'Maintenance', 'small_maintenance' => 'Small maintenance', 'big_maintenance' => 'Big maintenance', 'longlife_maintenance' => 'Longlife maintenance'])->inline()->rules(['required']),
-            Checkboxes::make('apk')->label('APK')->options(['apk' => 'APK']),
-            Date::make('apk_date')->label('APK date'),
-            Checkboxes::make('washed')->label('Washed')->options(['washed' => 'Washed']),
-            Checkboxes::make('tyre_pressure')->label('Tyre pressure')->options(['tyre_pressure' => 'Tyre pressure']),
-            Text::make('tasks_messages')->label('Tasks/messages'),
-            Input::make('total_price')->label('Total price'),
-            Input::make('mileage_begin')->label('Mileage begin'),
-            Input::make('mileage_end')->label('Mileage end')->class('pb-4'),
-            Submit::make()->label('Edit'),
-        ])
-        ->fill($maintenance);
+            ->action(route('account.maintenance.update', $maintenance))
+            ->method('PUT')
+            ->class('space-y-4 p-4 bg-white rounded')
+            ->fields([
+                Select::make('vehicle_id')->label('Vehicle')->options($vehicles)->class('pb-4')->rules(['required']),
+                Date::make('date')->label('Date')->rules(['required']),
+                Input::make('garage')->label('Garage'),
+                Radios::make('type_maintenance')->label('Type maintenance')->options(['no_maintenance' => 'No maintenance', 'maintenance' => 'Maintenance', 'small_maintenance' => 'Small maintenance', 'big_maintenance' => 'Big maintenance', 'longlife_maintenance' => 'Longlife maintenance'])->inline()->rules(['required']),
+                Checkboxes::make('apk')->label('APK')->options(['apk' => 'APK']),
+                Date::make('apk_date')->label('APK date'),
+                Checkboxes::make('washed')->label('Washed')->options(['washed' => 'Washed']),
+                Checkboxes::make('tyre_pressure')->label('Tyre pressure')->options(['tyre_pressure' => 'Tyre pressure']),
+                Text::make('tasks_messages')->label('Tasks/messages'),
+                Input::make('total_price')->label('Total price'),
+                Input::make('mileage_begin')->label('Mileage begin'),
+                Input::make('mileage_end')->label('Mileage end')->class('pb-4'),
+                Submit::make()->label('Edit'),
+            ])
+            ->fill($maintenance);
 
         return view('account.maintenances.edit', [
-            'form' => $form
+            'form' => $form,
         ]);
     }
 

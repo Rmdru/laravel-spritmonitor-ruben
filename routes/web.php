@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\VehicleController;
-use App\Http\Controllers\RefuelingController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RefuelingController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,7 +46,7 @@ Route::middleware('splade')->group(function () {
     });
 
     Route::middleware('auth')->prefix('/account')->name('account.')->group(function () {
-        Route::get('/', [AccountController::class, 'index'])->name('account.index');
+        Route::resource('/', AccountController::class);
         Route::resource('/maintenance', MaintenanceController::class);
         Route::resource('/refuelings', RefuelingController::class);
         Route::resource('/vehicles', VehicleController::class);

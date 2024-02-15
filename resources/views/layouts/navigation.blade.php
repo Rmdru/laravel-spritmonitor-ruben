@@ -6,37 +6,37 @@
                 <div class="flex">
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
-                        <Link href="/account/">
+                        <Link href="{{ route('account.index') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                         </Link>
                     </div>
 
                     <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
-                        <Link href="/account/" class="flex items-center">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('account.index')" :active="request()->routeIs('account.index')">
                             <span class="material-symbols-outlined">
                             show_chart
                             </span>
-                             Dashboard
-                        </Link>
-                        <Link href="/account/vehicles" class="flex items-center">
+                            Dashboard
+                        </x-nav-link>
+                        <x-nav-link :href="route('account.vehicles.index')" :active="request()->routeIs('account.vehicles.index')">
                             <span class="material-symbols-outlined">
                             directions_car
                             </span>
-                             Vehicles
-                        </Link>
-                        <Link href="/account/refuelings" class="flex items-center">
+                            Vehicles
+                        </x-nav-link>
+                        <x-nav-link :href="route('account.refuelings.index')" :active="request()->routeIs('account.refuelings.index')">
                             <span class="material-symbols-outlined">
                             local_gas_station
                             </span>
-                             Refuelings
-                        </Link>
-                        <Link href="/account/maintenance" class="flex items-center">
+                            Refuelings
+                        </x-nav-link>
+                        <x-nav-link :href="route('account.maintenance.index')" :active="request()->routeIs('account.maintenance.index')">
                             <span class="material-symbols-outlined">
                             build
                             </span>
-                             Maintenance
-                        </Link>
+                            Maintenance
+                        </x-nav-link>
                     </div>
                 </div>
 

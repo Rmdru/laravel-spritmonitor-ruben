@@ -5,12 +5,11 @@ namespace App\Tables;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
-use Illuminate\Support\Facades\Auth;
-
 
 class Vehicles extends AbstractTable
 {
@@ -45,7 +44,7 @@ class Vehicles extends AbstractTable
 
         $globalSearch = AllowedFilter::callback('global', function ($query, $value) {
             $query->where(function ($query) use ($value) {
-                Collection :: wrap($value)->each(function ($value) use ($query) {
+                Collection::wrap($value)->each(function ($value) use ($query) {
                     $query
                         ->orWhere('brand', 'LIKE', "%{$value}%")
                         ->orWhere('model', 'LIKE', "%{$value}%")
@@ -55,6 +54,7 @@ class Vehicles extends AbstractTable
                 });
             });
         });
+
         return QueryBuilder::for(Vehicle::class)
             ->where('user_id', $userId)
             ->defaultSort('id')
@@ -65,7 +65,6 @@ class Vehicles extends AbstractTable
     /**
      * Configure the given SpladeTable.
      *
-     * @param \ProtoneMedia\Splade\SpladeTable $table
      * @return void
      */
     public function configure(SpladeTable $table)
@@ -75,53 +74,53 @@ class Vehicles extends AbstractTable
             ->column('id', sortable: true)
             ->column('brand', sortable: true, as: function ($brand) {
                 $brand = ucfirst($brand);
-        
-                $brand = str_replace("_", " ", $brand);
-        
+
+                $brand = str_replace('_', ' ', $brand);
+
                 return $brand;
             })
             ->column('model', sortable: true)
             ->column('version', sortable: true)
             ->column('engine', sortable: true)
             ->column('factory_specification_fuel_usage', sortable: true, as: function ($factory_specification_fuel_usage) {
-                $factory_specification_fuel_usage = str_replace(".", ",", $factory_specification_fuel_usage);
-        
+                $factory_specification_fuel_usage = str_replace('.', ',', $factory_specification_fuel_usage);
+
                 return $factory_specification_fuel_usage;
             })
             ->column('average_fuel_usage', sortable: true, as: function ($average_fuel_usage) {
                 if (empty($average_fuel_usage)) {
-                    $average_fuel_usage = "-";
+                    $average_fuel_usage = '-';
                 }
-                $average_fuel_usage = str_replace(".", ",", $average_fuel_usage);
-        
+                $average_fuel_usage = str_replace('.', ',', $average_fuel_usage);
+
                 return $average_fuel_usage;
             })
             ->column('mileage_start', sortable: true)
             ->column('mileage_latest', sortable: true, as: function ($mileage_latest) {
                 if (empty($mileage_latest)) {
-                    $mileage_latest = "-";
+                    $mileage_latest = '-';
                 }
-        
+
                 return $mileage_latest;
             })
             ->column('purchase_date', sortable: true, as: function ($purchase_date) {
-                $purchase_date = date("d-m-Y", strtotime($purchase_date));
-        
+                $purchase_date = date('d-m-Y', strtotime($purchase_date));
+
                 return $purchase_date;
             })
             ->column('license_plate', sortable: true, as: function ($license_plate) {
                 if (empty($license_plate)) {
-                    $license_plate = "-";
+                    $license_plate = '-';
                 }
-        
+
                 return $license_plate;
             })
             ->column('fuel_type', sortable: true, as: function ($fuel_type) {
                 $fuel_type = ucfirst($fuel_type);
-        
-                $fuel_type = str_replace("_", " ", $fuel_type);
-                $fuel_type = str_replace("lpg", "LPG", $fuel_type);
-        
+
+                $fuel_type = str_replace('_', ' ', $fuel_type);
+                $fuel_type = str_replace('lpg', 'LPG', $fuel_type);
+
                 return $fuel_type;
             })
             ->column('action')
